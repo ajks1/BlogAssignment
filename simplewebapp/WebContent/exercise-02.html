@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="UTF-8" />
+		<title>ICT Questionnaire</title>
+	<style type="text/css">
+		input[type=number]{
+		width: 30px;
+    	}
+    	
+    	body  {
+    	background-image: url("assets/images/snowflakes.jpg");
+    	background-size: cover;
+    	color: white;
+    	padding-left: 30%;
+    	}
+   	</style>
+	
+	<script>
+		function validateForm() {
+		    var userEmail = document.forms["questionnaire"]["email"].value;
+		    var check = userEmail.endsWith(".ac.nz");
+		    if (check == false){
+		        alert("Not a valid e-mail address");
+		        return false;
+		    	}
+		    	return;
+			}
+	</script>
+		
+	</head>
+<body>
+<h1>ICT-Gradschool Midterm Questionnaire</h1>
+
+	<form name=questionnaire action="/lab13/FormDataList" onsubmit="return validateForm();" method="POST">
+	<input type="hidden" name="display" value="fancy">
+	
+	<fieldset><legend>Your Details</legend>
+		<p><label for="nameID">Name:</label><input required="required" type="text" id="nameID" name="name"/></p>
+		
+		<p><label for="emailID">Email:</label><input type="email" id="emailID" name="email"/></p>
+		
+		
+		<p>Your city:<input list="cities" name="cities">
+  			<datalist id="cities">
+   			<option value="Hamilton">
+    		<option value="Auckland">
+    		<option value="Christchurch">
+    		</datalist></p>
+ 	</fieldset>
+	
+	<fieldset><legend>Questionnaire</legend>
+		How are you finding the course? Tick all applicable:
+		<p>
+			<input type="checkbox" name="enjoyment[]" value="enjoying" id="enjoying_id" /><label  for="enjoying_id">Enjoying it</label>
+			<input type="checkbox" name="enjoyment[]" value="challenging" id="challenging_id" /><label  for="challenging_id">Challenging</label>
+			<input type="checkbox" name="enjoyment[]" value="still_catching_up" id="still_catching_up_id" /><label  for="still_catching_up_id">Still catching up</label>
+			<input type="checkbox" name="enjoyment[]" value="too hard" id="too hard" /><label  for="too hard">Too hard</label>
+			<input type="checkbox" name="enjoyment[]" value="too many exercises" id="too many exercises" /><label  for="too many exercises">Too many exercises</label>
+			<input type="checkbox" name="enjoyment[]" value="not enough exercises" id="not enough exercises" /><label  for="not enough exercises">Not enough exercises</label>
+			<input type="checkbox" name="enjoyment[]" value="confused" id="confused" /><label  for="confused">Confused</label>
+		</p>
+		
+		Choose the one that best describes your experience so far:
+		<p>
+			<input type="radio" name="learning" value="learning_a_lot" id="learning_a_lot_id" checked="checked"/><label for="learning_a_lot_id">Learning a lot</label>
+			<input type="radio" name="learning" value="not_learning_enough" id="not_learning_enough"/><label for="not_learning_enough">Not learning enough</label>
+			<input type="radio" name="learning" value="okay" id="okay"/><label for="okay">Okay</label>
+		</p>
+		
+		Rate the course so far from 1 (poor) to 10 (excellent): 
+		
+		<input type="number" name="rating" id="…" value="6" min="0" max="10" step="1" />
+		
+		
+		<p> Pick your favourite among the animals featured featured in the course's image gallery exercises: 
+		
+		<select id="animalID" name="animalName">
+			<option value="quokka" selected>Quokka</option>
+			<option value="fox">Arctic Fox</option>
+			<option value="wombat">Wombat</option>
+			<option value="hpika">Himalayan Pika</option>
+			<option value="lynx">Lynx</option>
+			<option value="cat">Pallas Cat</option>
+			<option value="pika">Pika</option>
+			<option value="panda">Red Panda</option>
+		</select>
+		</p>
+		
+		How can the course be improved? Choose one or more:
+		<p>
+		<select multiple="multiple" size="4" id="improveID" name="improve">
+			<option value="animals" selected>Access to real cuddly animals for petting(instead of just animal pictures)</option>
+			<option value="coffee">More coffee</option>
+			<option value="printing">Free printing</option>
+			<option value="hours">More hours in the day</option>
+			<option value="parking">Free parking</option>
+			<option value="vouchers">Vouchers for the local cafe</option>
+		</select>
+		</p>
+		
+		Additional comments:
+		<p><textarea id="comments" name="comments" rows="6" cols="80"></textarea>
+		</p>
+		
+ 	</fieldset>
+	
+	<input type="submit" value="Done!">
+	<input type="reset" value="Clear">
+	
+	</form>
+</body>
+</html>
