@@ -53,7 +53,7 @@
 		<p><label for="hometownID">Hometown:</label><input type="text" id="hometownID" name="hometown"/><label for="homeCountryID">Home Country:</label><input type="text" id="homeCountryID" name="homeCountry"/></p>
 		
 		<p><label for="currentCityID">Current city:</label><input type="text" id="currentCityID" name="currentCity"/><label for="currentCountryID">Current Country:</label><input type="text" id="currentCountryID" name="currentCountry"/></p>
-		
+		<!-- sdfgsfdsg -->
 	</fieldset>
 
 	<fieldset><legend>About me</legend>
