@@ -17,6 +17,10 @@ public class DatabaseDAO {
 		}
 		return null;
 	}
+	
+	public Connection getConnection() {
+		return this.connection;
+	}
 
 	//Empty private constructor to prevent other classes calling this
 	private DatabaseDAO() {
