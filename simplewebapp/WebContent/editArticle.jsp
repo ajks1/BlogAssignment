@@ -30,26 +30,33 @@
   });
   </script>
   
+  
   </head>
 
 <%@ page language="java"%>
 
   <body>
-	<form>
+	<form onreset="myreset()">
 	<fieldset>
 	<p><label for="titleID">Title:</label><input type="text" required="required" id="titleID" name="title"/></p>
 
 	<p>Date: <input type="text" id="datepicker" required="required" name="date"></p>
 	
 	<p><label for="article">Todays blog....</label>
-	<textarea id="articleID" name="article" rows="6" cols="90"></textarea></p>
-	
+	<textarea id="article" name="article" rows="6" cols="90"></textarea></p>
+		
   <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
   <script type="text/javascript">
 			//<![CDATA[ 
             bkLib.onDomLoaded(function(){
-            	new nicEditor({buttonList : ['fontSize','fontFamily', 'fontFormat','bold','italic','underline','strikeThrough','center','right','left','justify','indent', 'outdent','forecolor','bgcolor','upload','hr']}).panelInstance('articleID');
+            	new nicEditor({buttonList : ['fontSize','fontFamily', 'fontFormat','bold','italic','underline','strikeThrough','center','right','left','justify','indent', 'outdent','forecolor','bgcolor','upload','hr']}).panelInstance('article');
             });
+            
+            function myreset(){
+        	    var ne = nicEditors.findEditor("article");
+        	    ne.setContent("");
+        	}
+            
   			//]]>
   </script>
   	
@@ -60,7 +67,7 @@
    <p> File Uploader </p>
    </fieldset>
    	<input type="submit" value="Update!">
-	<input type="reset" value="Clear">
+	<input type="reset" name="clear" value="Clear All">
    </form>
   </body>
 </html>
