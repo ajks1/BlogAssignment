@@ -20,6 +20,16 @@
     	padding-right: 30%;
     	}
    	</style>
+   	
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>$(function() {
+    $( "#datepicker" ).datepicker().datepicker("setDate", new Date());
+  });
+  </script>
+  
   </head>
 
 <%@ page language="java"%>
@@ -28,15 +38,18 @@
 	<form>
 	<fieldset>
 	<p><label for="titleID">Title:</label><input type="text" required="required" id="titleID" name="title"/></p>
+
+	<p>Date: <input type="text" id="datepicker" required="required" name="date"></p>
 	
-	<p><label for="dateID">Date:</label><input type="date" value="2016-06-01" required="required" id="dateID" name="date"></p>
-	
-	<p><label for="article">Todays blog....</label><textarea id="articleID" name="article" rows="6" cols="90"></textarea></p>
+	<p><label for="article">Todays blog....</label>
+	<textarea id="articleID" name="article" rows="6" cols="90"></textarea></p>
 	
   <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
   <script type="text/javascript">
 			//<![CDATA[ 
-            bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+            bkLib.onDomLoaded(function(){
+            	new nicEditor({buttonList : ['fontSize','fontFamily', 'fontFormat','bold','italic','underline','strikeThrough','center','right','left','justify','indent', 'outdent','forecolor','bgcolor','upload','hr']}).panelInstance('articleID');
+            });
   			//]]>
   </script>
   	

@@ -20,6 +20,50 @@
     	padding-left: 30%;
     	padding-right: 30%;
     	}
+    	
+    	.pp-selector input{
+    	margin:0;padding:0;
+    	-webkit-appearance:none;
+    	-moz-appearance:none;
+        appearance:none;
+		}
+		
+		.nz{background-image:url("assets/images/nz.jpg");}
+		.tropic{background-image:url("assets/images/tropic.jpg");}
+		.asia{background-image:url("assets/images/asia.jpg");}
+		.africa{background-image:url("assets/images/africa.jpg");}
+		.america{background-image:url("assets/images/america.jpg");}
+		.european{background-image:url("assets/images/european.jpg");}
+
+		.pp-selector input:active +.photo-pp{opacity: .9;}
+		.pp-selector input:checked +.photo-pp{
+    	-webkit-filter: none;
+     	-moz-filter: none;
+        filter: none;
+		}
+		
+		.photo-pp{
+    	cursor:pointer;
+   		background-size:contain;
+    	background-repeat:no-repeat;
+   		display:inline-block;
+    	width:100px;height:70px;
+    	-webkit-transition: all 100ms ease-in;
+       	-moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    	-webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       	-moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+		}
+		
+		.photo-pp:hover{
+    	-webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       	-moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+		}
+
+
+
    	</style>
 </head>
 <%@ page language="java"%>
@@ -32,7 +76,23 @@
 	
 	<fieldset><legend>Your Details</legend>
 		<p> *All following fields are optional, however more details are more interesting!</p>
-		<p>Profile photo<p/>
+
+    <p>Select your profile photo</p>
+    <div class="pp-selector">
+        <input id="nz" type="radio" name="profilePic" value="nz" />
+        	<label class="photo-pp nz" for="nz"></label>
+        <input id="tropic" type="radio" name="profilePic" value="tropic" />
+        	<label class="photo-pp tropic"for="tropic"></label>
+        <input id="asia" type="radio" name="profilePic" value="asia" />
+        	<label class="photo-pp asia" for="asia"></label>
+        <input id="africa" type="radio" name="profilePic" value="africa" />
+        	<label class="photo-pp africa"for="africa"></label>
+        <input id="america" type="radio" name="profilePic" value="america" />
+        	<label class="photo-pp america"for="america"></label>
+        <input id="european" type="radio" name="profilePic" value="european" />
+        	<label class="photo-pp european"for="european"></label>
+    </div>
+		
 		<p><label for= "titleID">Title:</label>
 		<select id="titleID" name="title">
 			<option value="Mr" selected>Mr</option>
@@ -55,7 +115,6 @@
 		<p><label for="currentCityID">Current city:</label><input type="text" id="currentCityID" name="currentCity"/><label for="currentCountryID">Current Country:</label><input type="text" id="currentCountryID" name="currentCountry"/></p>
 		<!-- sdfgsfdsg -->
 	</fieldset>
-
 	<fieldset><legend>About me</legend>
 		<p><label for="about">On my travels I blog about....</label><textarea id="aboutID" name="about" rows="6" cols="90"></textarea></p>
 		
