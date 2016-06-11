@@ -146,15 +146,13 @@ out.println("Registered");  --%>
 						</div>
 					</div>
 
-					<div class="form-group "><%
-									if (userDetails != null) {
-								%><input type="hidden" name="action" value="update">
-						<button type="submit"
-							class="btn btn-primary btn-lg btn-block login-button">Update</button>
-							<%}else{ %> <input type="hidden" name="action" value="register">
+					<div class="form-group ">
+									
+			
+						  <input type="hidden" name="action" value="register">
 							<button type="submit"
 							class="btn btn-primary btn-lg btn-block login-button">Register</button>
-						<%} %>
+						
 					</div>
 				</form>
 			</div>

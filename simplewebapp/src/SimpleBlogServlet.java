@@ -33,13 +33,14 @@ public class SimpleBlogServlet extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		System.out.println("Email is: " + request.getParameter("email"));
 		System.out.println("Step0" + request.getParameter("action"));
 		/*
 		 * We need to check to see whether the user is attempting to login or
-		 * register. At this point, we are checking to see if he's trying to
-		 * register by validating the email parameter
-		 */
+		 * register or update. At this point, we are checking the action(register or update if not both 
+		 * it goes to login part atlast) from the form get all the
+		 * request parameters from the user to check the information**/
+		
+		
 		if (request.getParameter("action") != null) {
 			System.out.println("step1");
 			String action = (String) request.getParameter("action");
@@ -49,6 +50,7 @@ public class SimpleBlogServlet extends HttpServlet {
 			String userEmail = request.getParameter("email");
 			String userConfirm = request.getParameter("confirm");
 
+			//by using the email parameter checking whether the user is entering the regiter part or update paet
 			if (action.equals("register")) {
 				System.out.println("step2");
 				if (request.getParameter("email") != null) {
@@ -75,12 +77,12 @@ public class SimpleBlogServlet extends HttpServlet {
 				System.out.println("entered Upodate");
 				updateUser.setUserName(userName);
 				System.out.println(userName);
-				updateUser.setUserPassword(userPassword);
 				updateUser.setUserEmail(userEmail);
-				updateUser.setUserconfirm(userConfirm);
+				
 
 				UserDao userDao = new UserDao();
 				userDao.updateUserProfile(updateUser);
+				request.getRequestDispatcher("/editProfile.jsp").forward(request, response);
 
 			}
 		} else
@@ -101,7 +103,8 @@ public class SimpleBlogServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("userDetails", checkUserLogin);
 
-				displayHome(request, response);
+				request.getRequestDispatcher("/editProfile.jsp").forward(request, response);
+
 
 			} else {
 				displayHome(request, response);
