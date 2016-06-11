@@ -70,14 +70,13 @@ CREATE TABLE `usertable` (
   `user_Confirm` varchar(10) DEFAULT NULL,
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 /*Data for the table `usertable` */
 
 insert  into `usertable`(`favourite`,`travel`,`country`,`city`,`title`,`occupation`,`birthday`,`name`,`user_name`,`user_password`,`user_Email`,`user_Confirm`,`user_id`) values 
-(NULL,NULL,NULL,NULL,'Mr','techSupport','1987-10-15','sara','saran','kasi','kasi@gmail.com','password',1),
-('I have given varchar 100 for the te colmn hope it works\nabs jkasdcakjsdjasfcnsdvcskjdnvcsndvcsndjvn ','I have given varchar 100 for this column\nabs jkasdcakjsdjasfcnsdvcskjdnvcsndvcsndjvn jnfdjandsfjajnf','India','Mummbai','Miss','techSupport','1987-10-15','Kasigopa','kaasi@123','kasi','kasi.hot@gmail.com','kasi',3),
-(NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'ponnu','password','poonu@gmail.com','password',4);
+('				favourite ndc;lkjdc djkscaIDSJC DJHCIUDCC			',' \r\n				 i blog unjsdfc.;sdcscj kljd asdca\r\n				','Nwzealand','hamilton','Ms','teacher','1987-01-15','saraNYAA','saran','kasi','kasi@gmail.com','password',1),
+('																				I have given varchar 100 for the te colmn hope it worksjvn',' \r\n				  varchar 100 for this column abs jkasdcakjsdjasfcnsdvcs','India','Mummbai','Miss','student','1991-01-07','sara1','saran2016','kasi','sara@gmail.com','kasi',3);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
