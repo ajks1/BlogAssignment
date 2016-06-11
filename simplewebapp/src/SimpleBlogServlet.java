@@ -4,6 +4,9 @@ import simplewebapp.UserDao;
 import simplewebapp.UserVo;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.net.ssl.SSLSession;
@@ -36,21 +39,31 @@ public class SimpleBlogServlet extends HttpServlet {
 		System.out.println("Step0" + request.getParameter("action"));
 		/*
 		 * We need to check to see whether the user is attempting to login or
-		 * register or update. At this point, we are checking the action(register or update if not both 
-		 * it goes to login part atlast) from the form get all the
-		 * request parameters from the user to check the information**/
-		
-		
+		 * register or update. At this point, we are checking the
+		 * action(register or update if not both it goes to login part atlast)
+		 * from the form get all the request parameters from the user to check
+		 * the information
+		 **/
+
 		if (request.getParameter("action") != null) {
 			System.out.println("step1");
 			String action = (String) request.getParameter("action");
 			String userName = request.getParameter("username");
 			System.out.println("username is" + userName);
 			String userPassword = request.getParameter("password");
+			String userConfirm = request.getParameter("userconfirm");
 			String userEmail = request.getParameter("email");
-			String userConfirm = request.getParameter("confirm");
+			String name = request.getParameter("name");
+			String title = request.getParameter("title");
+			String occupation = request.getParameter("occupation");
+			String birthday = request.getParameter("birthday");
+			String city = request.getParameter("city");
+			String country = request.getParameter("country");
+			String travel = request.getParameter("travel");
+			String favourite = request.getParameter("favourite");
 
-			//by using the email parameter checking whether the user is entering the regiter part or update paet
+			// by using the email parameter checking whether the user is
+			// entering the regiter part or update paet
 			if (action.equals("register")) {
 				System.out.println("step2");
 				if (request.getParameter("email") != null) {
@@ -78,7 +91,27 @@ public class SimpleBlogServlet extends HttpServlet {
 				updateUser.setUserName(userName);
 				System.out.println(userName);
 				updateUser.setUserEmail(userEmail);
-				
+				updateUser.setName(name);
+				updateUser.setTitle(title);
+				updateUser.setOccupation(occupation);
+				if (birthday != null) {
+					DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+					Date date;
+					try {
+						date = format.parse(birthday);
+						updateUser.setBirthday(date);
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+					
+				}
+
+				updateUser.setCity(city);
+				updateUser.setCountry(country);
+				updateUser.setTravel(travel);
+				updateUser.setFavourite(favourite);
 
 				UserDao userDao = new UserDao();
 				userDao.updateUserProfile(updateUser);
@@ -104,7 +137,6 @@ public class SimpleBlogServlet extends HttpServlet {
 				session.setAttribute("userDetails", checkUserLogin);
 
 				request.getRequestDispatcher("/editProfile.jsp").forward(request, response);
-
 
 			} else {
 				displayHome(request, response);

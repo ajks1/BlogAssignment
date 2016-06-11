@@ -46,15 +46,10 @@ out.println("Registered");  --%>
 		<div class="row main">
 			<div class="panel-heading">
 				<div class="panel-title text-center">
-					<%
-						if (userDetails != null) {
-					%>
-					<h1 class="title">User Profile</h1>
-					<%
-						}else{
-					%>
+					
+				
 					<h1 class="title">WebBlog Register</h1>
-					<%} %>
+					
 					
 					<hr />
 				</div>
@@ -69,19 +64,10 @@ out.println("Registered");  --%>
 							<div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-user fa"
 									aria-hidden="true"></i></span>
-								<%
-									if (userDetails != null) {
-								%>
-								<input type="text" class="form-control" name="name" id="name"
-									value="<%=userDetails.getUserName()%>" />
-								<%
-									} else {
-								%>
+							
 								<input type="text" class="form-control" name="name" id="name"
 									placeholder="Enter your Name" />
-								<%
-									}
-								%>
+								
 							</div>
 						</div>
 					</div>
@@ -93,19 +79,11 @@ out.println("Registered");  --%>
 							<div class="input-group">
 								<span class="input-group-addon"><i
 									class="fa fa-envelope fa" aria-hidden="true"></i></span>
-								<%
-									if (userDetails != null) {
-								%>
-								<input type="text" class="form-control" name="email" id="email" value="<%=userDetails.getUserEmail()%>" />
-								<%
-									} else {
-								%>
+								
 
 								<input type="text" class="form-control" name="email" id="email"
 									placeholder="Enter your Email" />
-								<%
-									}
-								%>
+							
 							</div>
 						</div>
 					</div>

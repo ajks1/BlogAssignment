@@ -76,7 +76,7 @@ public class UserDao {
 
 				String name = res.getString("name");
 				String title = res.getString("title");
-				String birthday = res.getString("birthday");
+				Date birthday = res.getDate("birthday");
 				String occupation = res.getString("occupation");
 				String city = res.getString("city");
 				String country = res.getString("country");
@@ -103,15 +103,31 @@ public class UserDao {
 		// TODO Auto-generated method stub
 
 		PreparedStatement preparedStatement = null;
-		String sql = "update userTable  set  user_name = ?,user_Email = ? where user_id=?";
+		String sql = "update userTable  set  user_name = ?,user_Email = ?, "
+				+ "title =?, birthday=?, name=?, occupation=?,city =?, country=?, travel= ?,  "
+				+ "favourite = ? "
+				+ "where user_id=?";
 
 		try {
 			databaseDAO.getConnection().prepareStatement(sql);
 			preparedStatement = databaseDAO.getConnection().prepareStatement(sql);
 			System.out.println("The user is: " + updateUser.getUserName());
 			preparedStatement.setString(1, updateUser.getUserName());
-			preparedStatement.setString(2, updateUser.getUserEmail());
-			preparedStatement.setInt(3, updateUser.getUserId());
+			preparedStatement.setString(2, updateUser.getUserEmail());			
+			preparedStatement.setString(3, updateUser.getTitle());
+			preparedStatement.setDate(4, (new java.sql.Date(updateUser.getBirthday().getTime())));
+			preparedStatement.setString(5, updateUser.getName());
+			preparedStatement.setString(6, updateUser.getOccupation());
+			preparedStatement.setString(7, updateUser.getCity());
+			preparedStatement.setString(8, updateUser.getCountry());
+			System.out.println("The travel is : " + updateUser.getTravel().length());
+			preparedStatement.setString(9, updateUser.getTravel());
+			preparedStatement.setString(10, updateUser.getFavourite());
+			preparedStatement.setInt(11, updateUser.getUserId());
+			
+			
+			
+			
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 

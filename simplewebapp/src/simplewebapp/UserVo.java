@@ -1,6 +1,7 @@
 package simplewebapp;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserVo implements Serializable{
 
@@ -12,7 +13,7 @@ public class UserVo implements Serializable{
 		this.userEmail = userEmail;
 	}
 
-	public UserVo(String userName,String userEmail, String name, String title, String birthday,String occupation, String city,
+	public UserVo(String userName,String userEmail, String name, String title, Date birthday,String occupation, String city,
 			String country, String travel,String favourite,Integer userId) {
 		// TODO Auto-generated constructor stub
 		this.userName = userName;
@@ -20,13 +21,13 @@ public class UserVo implements Serializable{
 		this.userEmail = userEmail;
 		this.name = name;
 		this.title = title;
-		this.setBirthday(birthday);
+		this.birthday = birthday;
 		this.occupation = occupation;
 		this.city = city;
 		this.country = country;
 		this.travel =travel;
 		this.favourite = favourite;
-		this.userId = userId;
+		this.userId =userId;
 		
 	}
 
@@ -38,7 +39,7 @@ public class UserVo implements Serializable{
 	private Integer userId;
 	private String profilePhoto;
 	
-	private String birthday;
+	private Date birthday;
 	private String travel;
 	private String favourite;
 	private String country;
@@ -145,11 +146,11 @@ public class UserVo implements Serializable{
 		this.favourite = favourite;
 	}
 
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
