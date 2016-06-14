@@ -26,13 +26,13 @@ public class ArticleDAO {
 		try {
 			// Ignore any error below shown by Eclipse
 			ResultSet rs = databaseDAO.doQuery(query);
-			while(rs.next()) {
+			while (rs.next()) {
 				// Converting the results into a Article object
 				int id = rs.getInt("article_id");
 				String title = rs.getString("title");
 				String body = rs.getString("body");
 				// Adding the post object to the list
-				l.add(new Article(id,title,body));
+				l.add(new Article(id, title, body));
 			}
 		} catch (SQLException e) {
 			System.err.println(e);
@@ -53,11 +53,35 @@ public class ArticleDAO {
 		String query = "SELECT * FROM article WHERE article_id = " + articleID;
 		List<Article> l = doQuery(query);
 
-		//Getting the first item from the returned list
+		// Getting the first item from the returned list
 		Article a = null;
-		if(!l.isEmpty() && l.size() > 0) {
+		if (!l.isEmpty() && l.size() > 0) {
 			a = l.get(0);
 		}
 		return a;
+	}
+
+	public void updateArticle(Article a) {
+		PreparedStatement preparedStatement = null;
+		String query = "update article set title =? , body=? where article_id=?";
+
+		try {
+			// Ignore any error below shown by Eclipse
+
+			
+			preparedStatement = databaseDAO.getConnection().prepareStatement(query);
+
+			preparedStatement.setString(1, a.getTitle());
+			preparedStatement.setString(2, a.getBody());
+			preparedStatement.setInt(3, a.getId());
+			
+
+			preparedStatement.executeUpdate();
+		} catch (
+
+		SQLException e) {
+
+			e.printStackTrace();
+		}
 	}
 }

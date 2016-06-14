@@ -116,17 +116,17 @@ body {
 
 			<p>Select your profile photo</p>
 			<div class="pp-selector">
-				<input id="nz" type="radio" name="profilePic" /> <label
-					class="photo-pp nz" for="nz"></label> <input id="tropic"
-					type="radio" name="profilePic" value="tropic" /> <label
+				<input id="nz" type="radio" name="profilePhoto" /> <label
+					class="photo-pp nz" for="nz" ></label> <input id="tropic"
+					type="radio" name="profilePhoto" value="tropic" /> <label
 					class="photo-pp tropic" for="tropic"></label> <input id="asia"
-					type="radio" name="profilePic" value="asia" /> <label
+					type="radio" name="profilePhoto" value="asia" /> <label
 					class="photo-pp asia" for="asia"></label> <input id="africa"
-					type="radio" name="profilePic" value="africa" /> <label
+					type="radio" name="profilePhoto" value="africa" /> <label
 					class="photo-pp africa" for="africa"></label> <input id="america"
-					type="radio" name="profilePic" value="america" /> <label
+					type="radio" name="profilePhoto" value="america" /> <label
 					class="photo-pp america" for="america"></label> <input
-					id="european" type="radio" name="profilePic" value="european" /> <label
+					id="european" type="radio" name="profilePhoto" value="european" /> <label
 					class="photo-pp european" for="european"></label>
 			</div>
 
@@ -193,12 +193,12 @@ body {
 			</p>
 
 		</fieldset>
-		<%
-			if (userDetails != null)
-		%>
+	
+	
 		<input type = "hidden" name="action" value=update>
-		<button type="submit"> Update</button><input
-			type="reset" value="Clear">
+		<button type="submit" name="action" value="update">  Update</button>
+		<button type="submit" name="action" value="delete">  Delete</button>
+		<input type="reset" value="Clear">
 	</form>
 </body>
 </html>

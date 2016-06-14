@@ -6,21 +6,35 @@ public class Article {
 	private String body;
 
 	Article(int id,String title,String body) {
-		this.id = id;
-		this.title = title;
-		this.body = body;
+		this.setId(id);
+		this.setTitle(title);
+		this.setBody(body);
 	}
 
-	public int getID() {
-		return this.id;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getTitle() {
-		return this.title;
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getBody() {
-		return this.body;
+		return body;
 	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+
 
 }

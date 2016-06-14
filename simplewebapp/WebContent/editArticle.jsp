@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <%@page contentType="text/html"%>
@@ -36,20 +36,33 @@
 <%@ page language="java"%>
 
   <body>
-	<form onreset="myreset()">
+  	<%
+		Article articleDetails = null;
+		//get the article details from request 
+		if (request.getAttribute("Article") != null) {
+
+			articleDetails = (Article) request.getAttribute("Article");
+		}
+	%>
+	<c:set var="article" value="<%=articleDetails%>" />
+  
+  
+	<form onreset="myreset()" method="post" action="SimpleBlog">
+	<input type ="hidden" name="article" value="${article.id}"/>
 	<fieldset>
-	<p><label for="titleID">Title:</label><input type="text" required="required" id="titleID" name="title"/></p>
+	<p><label for="titleID">Title:</label><input type="text" required="required" id="titleID" name="title" value="${article.title}"
+	/></p>
 
 	<p>Date: <input type="text" id="datepicker" required="required" name="date"></p>
 	
-	<p><label for="article">Todays blog....</label>
-	<textarea id="article" name="article" rows="6" cols="90"></textarea></p>
+	<p><label for="body">Todays blog....</label>
+	<textarea id="body" name="body" rows="6" cols="90"><c:out value="${article.body}" /></textarea></p>
 		
   <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
   <script type="text/javascript">
 			//<![CDATA[ 
             bkLib.onDomLoaded(function(){
-            	new nicEditor({buttonList : ['fontSize','fontFamily', 'fontFormat','bold','italic','underline','strikeThrough','center','right','left','justify','indent', 'outdent','forecolor','bgcolor','upload','hr']}).panelInstance('article');
+            	new nicEditor({buttonList : ['fontSize','fontFamily', 'fontFormat','bold','italic','underline','strikeThrough','center','right','left','justify','indent', 'outdent','forecolor','bgcolor','upload','hr']}).panelInstance('body');
             });
             
             function myreset(){
@@ -66,7 +79,7 @@
    <fieldset>
    <p> File Uploader </p>
    </fieldset>
-   	<input type="submit" value="Update!">
+   	<input type="submit" name="articleAction" value="update">
 	<input type="reset" name="clear" value="Clear All">
    </form>
   </body>

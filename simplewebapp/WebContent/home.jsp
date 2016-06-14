@@ -162,7 +162,7 @@ if(session.getAttribute("userDetails") != null ){
 
       for (Article a : articles) {
         String articleTitle = a.getTitle();
-        int articleID = a.getID();
+        int articleID = a.getId();
         String linkURI = String.format("?article=%d", articleID);
         out.println("<section class=\"article\">");
         out.println("<p>");
@@ -226,8 +226,14 @@ if(session.getAttribute("userDetails") != null ){
                     
     	});
     });
-        
-    </script>
+    
+<%String message = (String) request.getAttribute("message");
+			if (message != null) {%> 
+    $(document).ready(function() {
+    	alert("<%=message%>");
+					});
+				<%}%>
+				</script>
     <script type="text/javascript" src="bootstrap.js"></script>
 	<script type="text/javascript" src="validator.js"></script>
 	<script type="text/javascript" src="custom.js"></script>	

@@ -25,7 +25,7 @@ public class SimpleBlogServlet extends HttpServlet {
 		}
 
 		if (request.getParameter("article") != null) {
-			displayArticle(request, response);
+			editArticle(request, response);
 		} else {
 			displayHome(request, response);
 		}
@@ -37,6 +37,11 @@ public class SimpleBlogServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		System.out.println("Step0" + request.getParameter("action"));
+		// goto edit article if the article paramater is set in the request
+		if (request.getParameter("article") != null) {
+			editArticle(request, response);
+			return;
+		} 
 		/*
 		 * We need to check to see whether the user is attempting to login or
 		 * register or update. At this point, we are checking the
@@ -61,6 +66,9 @@ public class SimpleBlogServlet extends HttpServlet {
 			String country = request.getParameter("country");
 			String travel = request.getParameter("travel");
 			String favourite = request.getParameter("favourite");
+			String profilePhoto = request.getParameter("profilePhoto");
+			System.out.println("profilePhoto is: "+profilePhoto);
+			
 
 			// by using the email parameter checking whether the user is
 			// entering the regiter part or update paet
@@ -82,7 +90,8 @@ public class SimpleBlogServlet extends HttpServlet {
 
 					userDao.insertUser(user);
 
-					request.getRequestDispatcher("/Register.jsp").forward(request, response);
+					//request.getRequestDispatcher("/home.jsp").forward(request, response);
+					displayHome(request, response);
 				}
 
 			} else {
@@ -112,10 +121,15 @@ public class SimpleBlogServlet extends HttpServlet {
 				updateUser.setCountry(country);
 				updateUser.setTravel(travel);
 				updateUser.setFavourite(favourite);
+				updateUser.setProfilePhoto(profilePhoto);
+				
 
 				UserDao userDao = new UserDao();
 				userDao.updateUserProfile(updateUser);
-				request.getRequestDispatcher("/editProfile.jsp").forward(request, response);
+				//request.getRequestDispatcher("/editProfile.jsp").forward(request, response);
+				String message = "Your profile details updated successfully";						
+				request.setAttribute("message", message);
+				displayHome(request, response);
 
 			}
 		} else
@@ -175,4 +189,34 @@ public class SimpleBlogServlet extends HttpServlet {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/article.jsp");
 		dispatcher.forward(request, response);
 	}
+	
+	protected void editArticle(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// Getting the instance of the ArticleDAO
+		ArticleDAO articleDAO = ArticleDAO.getInstance();
+
+		// Parsing the parameter to an int
+		int id = Integer.parseInt(request.getParameter("article"));
+		// Getting all the articles as a list
+		Article a = articleDAO.getByArticleID(id);
+		
+		String action = request.getParameter("articleAction");
+		
+		if( action != null && action.equals("update")){
+			//Article updateArticle = (Article) request.getAttribute("Article");
+			String title = request.getParameter("title");
+			String body = request.getParameter("body");
+			a.setTitle(title);
+			a.setBody(body);
+			articleDAO.updateArticle(a);		
+			
+		}
+		
+		request.setAttribute("Article", a);
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/editArticle.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	
 }

@@ -14,7 +14,7 @@ public class UserVo implements Serializable{
 	}
 
 	public UserVo(String userName,String userEmail, String name, String title, Date birthday,String occupation, String city,
-			String country, String travel,String favourite,Integer userId) {
+			String country, String travel,String favourite,Integer userId,String profilePhoto) {
 		// TODO Auto-generated constructor stub
 		this.userName = userName;
 		//this.profilePhoto = profilePhoto;
@@ -28,6 +28,7 @@ public class UserVo implements Serializable{
 		this.travel =travel;
 		this.favourite = favourite;
 		this.userId =userId;
+		this.profilePhoto= profilePhoto;
 		
 	}
 

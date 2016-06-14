@@ -83,11 +83,12 @@ public class UserDao {
 				String travel = res.getString("travel");
 				String favourite = res.getString("favourite");
 				Integer userId = res.getInt("user_id");
+				String profilePhoto = res.getString("profile_pic");
 
 				// Adding the post object to the list
 
 				return new UserVo(username, email, name, title, birthday, occupation, city, country, travel, favourite,
-						userId);
+						userId, profilePhoto);
 
 			}
 
@@ -105,15 +106,14 @@ public class UserDao {
 		PreparedStatement preparedStatement = null;
 		String sql = "update userTable  set  user_name = ?,user_Email = ?, "
 				+ "title =?, birthday=?, name=?, occupation=?,city =?, country=?, travel= ?,  "
-				+ "favourite = ? "
-				+ "where user_id=?";
+				+ "favourite = ? , profile_pic =?" + " where user_id=?";
 
 		try {
 			databaseDAO.getConnection().prepareStatement(sql);
 			preparedStatement = databaseDAO.getConnection().prepareStatement(sql);
 			System.out.println("The user is: " + updateUser.getUserName());
 			preparedStatement.setString(1, updateUser.getUserName());
-			preparedStatement.setString(2, updateUser.getUserEmail());			
+			preparedStatement.setString(2, updateUser.getUserEmail());
 			preparedStatement.setString(3, updateUser.getTitle());
 			preparedStatement.setDate(4, (new java.sql.Date(updateUser.getBirthday().getTime())));
 			preparedStatement.setString(5, updateUser.getName());
@@ -123,11 +123,28 @@ public class UserDao {
 			System.out.println("The travel is : " + updateUser.getTravel().length());
 			preparedStatement.setString(9, updateUser.getTravel());
 			preparedStatement.setString(10, updateUser.getFavourite());
-			preparedStatement.setInt(11, updateUser.getUserId());
-			
-			
-			
-			
+			preparedStatement.setString(11, updateUser.getProfilePhoto());
+			preparedStatement.setInt(12, updateUser.getUserId());
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+	}
+
+	public void deleteUserProfile(UserVo deleteUser) {
+
+		PreparedStatement preparedStatement = null;
+		String sql = "delete from usertable where user_name = ? AND user_id = ?";
+
+		try {
+			databaseDAO.getConnection().prepareStatement(sql);
+			preparedStatement = databaseDAO.getConnection().prepareStatement(sql);
+			System.out.println("The user is: " + deleteUser.getUserName());
+			preparedStatement.setString(1, deleteUser.getUserName());
+			preparedStatement.setInt(2, deleteUser.getUserId());
+
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 
