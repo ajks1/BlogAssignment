@@ -4,7 +4,7 @@
 <%@page contentType="text/html"%>
 <%@ page language="java" import="java.sql.*,java.util.List,java.util.ArrayList" %>
 <%@ page import="simplewebapp.Article,simplewebapp.UserVo" %>
-
+<%@ page import="simplewebapp.*" %>
 
 <html>
   <head>
@@ -12,27 +12,30 @@
     <link href="bootstrap.min.css" rel="stylesheet">
   <link href="wucustom.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="hompage.css">
+
   </head>
-<!-- bro -->
+
 <%@ page language="java"%>
 
   <body>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <div class="navbar-header">
+    <div class="navbar-header" height="200">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">Portfolio</a>
+      <a class="navbar-brand" href="#">TravallingBlog</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">Contact</a></li>
+        <li class="active"><a href="home.jsp">Home</a></li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
        
@@ -99,24 +102,87 @@ if(session.getAttribute("userDetails") != null ){
     </div>
   </div>
 </nav>
+ <section id="view" class="container">
+ 
+ <div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-3 sidenav">
+      <h4>Travelling Blog</h4>
+      <ul class="nav nav-pills nav-stacked">
+      <%
+      List<Article> articles = (List<Article>) request.getAttribute("Articles");
+
+      for (Article a : articles) {
+        String articleTitle = a.getTitle();
+        int articleID = a.getId();
+        String linkURI = String.format("?article=%d", articleID);
+        out.println("<section class=\"article\">");
+        out.println("<p>");
+        out.println("<a href=\"" + linkURI + "\">" + articleTitle + "</a>");
+        out.println("</p>");
+        out.println("</section>");
+      }
+      %>
+      </ul>
+     
+      
+      <br>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search Blog..">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+
+
+
     <div class="col-sm-9">
-      <h4><small>RECENT POSTS</small></h4>
-      <hr>
-      <h2>I Love Food</h2>
-      <h5><span class="glyphicon glyphicon-time"></span> Post by Jane Dane, Sep 27, 2015.</h5>
-      <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
-      <p>Food is my passion. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <br><br>
+     
+       <section id="view" class="container">
+      <%
+      Article a = (Article) request.getAttribute("Article");
+
+      Integer id = a != null ? a.getId() : 0;
+      String articleTitle = a != null ? a.getTitle() : "";
+      String articleBody = a != null ? a.getBody() : ""; 
+
+      %>
+
+    
+    </section>
       
       <h4><small>RECENT POSTS</small></h4>
       <hr>
-      <h2>Officially Blogging</h2>
+      <h2><%= articleTitle %></h2>
       <h5><span class="glyphicon glyphicon-time"></span> Post by John Doe, Sep 24, 2015.</h5>
       <h5><span class="label label-success">Lorem</span></h5><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      <hr>
+      <p><%= articleBody %></p><br>
+      <span class="input-group-btn">
+          <a href="?article=<%=id%>&edit=1">
+          <button class="btn btn-default" type="button">
+          	 <span class="glyphicon glyphicon-edit"></span>
+          </button>
+          </a>
+          
+        </span>
 
-      <h4>Leave a Comment:</h4>
+					<form role="form" action="Comment" method="post">
+						<div class="form-group">
+							<label>user Name: </label> <input type="text"
+								class="form-control" name="userName" /><br>
+							<textarea class="form-control" rows="3" name="word" required></textarea>
+						</div>
+						<button type="submit" class="btn btn-success">Submit</button>
+
+					</form>
+
+			
+
+					<h4>Leave a Comment:</h4>
       <form role="form">
         <div class="form-group">
           <textarea class="form-control" rows="3" required></textarea>
@@ -156,22 +222,11 @@ if(session.getAttribute("userDetails") != null ){
           </div>
         </div>
       </div>
-    <section id="view" class="container">
-      <%
-      List<Article> articles = (List<Article>) request.getAttribute("Articles");
+      </div>
+      </div>
+      </div>
 
-      for (Article a : articles) {
-        String articleTitle = a.getTitle();
-        int articleID = a.getId();
-        String linkURI = String.format("?article=%d", articleID);
-        out.println("<section class=\"article\">");
-        out.println("<p>");
-        out.println("<a href=\"" + linkURI + "\">" + articleTitle + "</a>");
-        out.println("</p>");
-        out.println("</section>");
-      }
-      %>
-    </section>
+    </section> 
     <SCRIPT type="text/javascript" src="jquery-1.9.1.min.js"></SCRIPT>
     <script>
     $(document).ready(function(){

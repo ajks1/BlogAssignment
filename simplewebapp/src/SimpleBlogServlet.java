@@ -23,9 +23,21 @@ public class SimpleBlogServlet extends HttpServlet {
 		if (request.getParameter("logout") != null) {
 			request.getSession().invalidate();
 		}
-
+// check article id and if it is not null display all info in  home page else dont display article
+		
 		if (request.getParameter("article") != null) {
-			editArticle(request, response);
+			if (request.getParameter("edit") != null) {
+				editArticle(request, response);
+			} else {
+				// Getting the instance of the ArticleDAO
+				ArticleDAO articleDAO = ArticleDAO.getInstance();
+				// Parsing the parameter to an int
+				int id = Integer.parseInt(request.getParameter("article"));
+				// Getting all the articles as a list
+				Article a = articleDAO.getByArticleID(id);
+				request.setAttribute("Article", a);
+				displayHome(request, response);
+			}
 		} else {
 			displayHome(request, response);
 		}
